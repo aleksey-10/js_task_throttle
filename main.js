@@ -4,16 +4,18 @@ function throttle(f, delay) {
   let timer;
 
   return function(event) {
-    if (timer !== undefined) {
-      return;
+    if (timer === undefined) {
+      f.call(this, event);
     }
     
-    f.call(this, event);
+    if (timer) {
+      return;
+    }
 
-    timer = setInterval(() => {
-      setTimeout(() => f.call(this, event), delay);
-      clearInterval(timer)
-      timer = undefined;
+    timer = setTimeout(() => {
+      f.call(this, event);
+      clearTimeout(timer);
+      timer = null;
     }, delay);
   }
 }
