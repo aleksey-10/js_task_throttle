@@ -1,0 +1,1 @@
+[DEMO](https://aleksey-10.github.io/js_task_throttle)
